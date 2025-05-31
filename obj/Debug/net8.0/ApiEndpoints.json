@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
+    "Method": "GetFiscalNotes",
+    "RelativePath": "api/FiscalNote",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
+    "Method": "AddFiscalNote",
+    "RelativePath": "api/FiscalNote",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QueroNotaFiscal.Models.Requests.FiscalNoteRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

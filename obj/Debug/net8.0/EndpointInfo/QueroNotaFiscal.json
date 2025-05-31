@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "QueroNotaFiscal",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/FiscalNote": {
+      "get": {
+        "tags": [
+          "FiscalNote"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FiscalNote"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FiscalNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FiscalNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FiscalNoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FiscalNoteRequest": {
+        "required": [
+          "cnpjIssuing",
+          "cnpjRecipient",
+          "fiscalNoteNumber",
+          "totalValue"
+        ],
+        "type": "object",
+        "properties": {
+          "fiscalNoteNumber": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "totalValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "cnpjIssuing": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "cnpjRecipient": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@QueroNotaFiscal_HostAddress = http://localhost:5032
+
+GET {{QueroNotaFiscal_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
