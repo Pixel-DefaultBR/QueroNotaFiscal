@@ -9,10 +9,9 @@ namespace QueroNotaFiscal.Mappers
     {
         public FiscalNoteMapper()
         {
-            // Entidade => DTO de Resposta
+
             CreateMap<FiscalNoteEntity, FiscalNoteDto>();
 
-            // DTO de Request => Entidade
             CreateMap<FiscalNoteRequest, FiscalNoteEntity>();
         }
     }

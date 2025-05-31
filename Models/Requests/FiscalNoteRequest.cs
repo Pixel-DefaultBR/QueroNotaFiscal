@@ -6,8 +6,6 @@ namespace QueroNotaFiscal.Models.Requests
 {
     public class FiscalNoteRequest
     {
-        [Required(ErrorMessage = "Numero da nota fiscal é obrigatório")]
-        public string FiscalNoteNumber { get; set; }
         [Required(ErrorMessage = "´Valor da nota é obrigatorio.")]
         public decimal TotalValue { get; set; }
         

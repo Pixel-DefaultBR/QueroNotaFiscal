@@ -25,9 +25,8 @@ namespace QueroNotaFiscal.Database.Repository.FiscalNote
         {
            var fiscalNote = await _context.FiscalNotes.FirstOrDefaultAsync(f => f.CNPJIssuing == cnpj);
 
-           return fiscalNote;
+            return fiscalNote;
         }
-
         public Task<FiscalNoteEntity?> GetByIdAsync(int fiscalNoteId)
         {
             var fiscalNote = _context.FiscalNotes
@@ -35,21 +34,32 @@ namespace QueroNotaFiscal.Database.Repository.FiscalNote
             return fiscalNote;
         }
 
-        public Task UpdateAsync(FiscalNoteEntity fiscalNote)
+        public async Task UpdateAsync(int fiscalNoteId, FiscalNoteEntity fiscalNote)
         {
-            var existingFiscalNote = _context.FiscalNotes
-                .FirstOrDefaultAsync(f => f.FiscalNoteId == fiscalNote.FiscalNoteId);
-            if (existingFiscalNote == null)
-            {
-                throw new InvalidOperationException("Nota fiscal não encontrada");
-            }
-            _context.FiscalNotes.Update(fiscalNote);
-            return Task.CompletedTask;
+            var existingFiscalNote = await _context.FiscalNotes
+                .FirstOrDefaultAsync(f => f.FiscalNoteId == fiscalNoteId);
+
+            existingFiscalNote.FiscalNoteNumber = fiscalNote.FiscalNoteNumber;
+            existingFiscalNote.TotalValue = fiscalNote.TotalValue;
+            existingFiscalNote.CNPJIssuing = fiscalNote.CNPJIssuing;
+            existingFiscalNote.CNPJRecipent = fiscalNote.CNPJRecipent;
+
+            _context.FiscalNotes.Update(existingFiscalNote);
+        }
+
+
+        public async Task DeleteAsync(int fiscalNoteId)
+        {
+            var fiscalNote = await _context.FiscalNotes
+                .FirstOrDefaultAsync(f => f.FiscalNoteId == fiscalNoteId);
+
+            _context.FiscalNotes.Remove(fiscalNote);
         }
 
         public async Task CommitAsync()
         {
             await _context.SaveChangesAsync();
         }
+
     }
 }

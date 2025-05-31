@@ -1,8 +1,8 @@
 ﻿using QueroNotaFiscal.Database.Repository.FiscalNote;
 using QueroNotaFiscal.DTOS;
-using QueroNotaFiscal.Models;
 using QueroNotaFiscal.Models.Requests;
 using QueroNotaFiscal.Models.Response;
+using QueroNotaFiscal.Utils;
 
 namespace QueroNotaFiscal.Services.FiscalNote
 {
@@ -16,14 +16,18 @@ namespace QueroNotaFiscal.Services.FiscalNote
 
         public async Task<Result<bool>> AddAsync(FiscalNoteRequest request)
         {
+
+            string randomFiscalNoteNumber = GenerateFiscalNumber.GenerateNumber();
+
             var fiscalNoteExists = await _fiscalNoteRepository.GetByIssuingCNPJAsync(request.CNPJIssuing);
 
-            if (fiscalNoteExists != null && fiscalNoteExists.FiscalNoteNumber == request.FiscalNoteNumber)
+            if (fiscalNoteExists != null && fiscalNoteExists.FiscalNoteNumber == randomFiscalNoteNumber)
             {
                 return Result<bool>.Failure("Nota fiscal já cadastrada para o CNPJ de emissão informado.");
             }
+
             var fiscalNoteEntity = new FiscalNoteEntity(
-                request.FiscalNoteNumber,
+                $"N-{randomFiscalNoteNumber}",
                 request.TotalValue,
                 request.CNPJIssuing,
                 request.CNPJRecipient
@@ -35,9 +39,18 @@ namespace QueroNotaFiscal.Services.FiscalNote
             return Result<bool>.Success(true);
         }
 
-        public Task<Result<bool>> DeleteAsync(int fiscalNoteId)
+        public async Task<Result<bool>> DeleteAsync(int fiscalNoteId)
         {
-            throw new NotImplementedException();
+            var fiscalNote = await _fiscalNoteRepository.GetByIdAsync(fiscalNoteId);
+            if (fiscalNote == null)
+            {
+                return Result<bool>.Failure("Nota fiscal não encontrada.");
+            }
+
+            await _fiscalNoteRepository.DeleteAsync(fiscalNoteId);
+            await _fiscalNoteRepository.CommitAsync();
+
+            return Result<bool>.Success(true);
         }
 
         public async Task<Result<IEnumerable<FiscalNoteDto>>> GetAllAsync()
@@ -60,9 +73,25 @@ namespace QueroNotaFiscal.Services.FiscalNote
             throw new NotImplementedException();
         }
  
-        public Task<Result<bool>> UpdateAsync(FiscalNoteRequest request)
+        public async Task<Result<bool>> UpdateAsync(int fiscalNoteId, FiscalNoteRequest request)
         {
-            throw new NotImplementedException();
+            var fiscalNote = await _fiscalNoteRepository.GetByIdAsync(fiscalNoteId);
+            var fiscalNoteNumber = fiscalNote.FiscalNoteNumber;
+
+            if (fiscalNote == null)
+            {
+                return Result<bool>.Failure("Nota fiscal não encontrada.");
+            }
+
+            await _fiscalNoteRepository.UpdateAsync(fiscalNoteId, new FiscalNoteEntity(
+                $"N-{fiscalNote}",
+                request.TotalValue,
+                request.CNPJIssuing,
+                request.CNPJRecipient
+            ));
+
+            await _fiscalNoteRepository.CommitAsync();
+            return Result<bool>.Success(true);
         }
     }
 }

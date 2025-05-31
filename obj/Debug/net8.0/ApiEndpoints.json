@@ -1,18 +1,8 @@
 [
   {
     "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
-    "Method": "GetFiscalNotes",
-    "RelativePath": "api/FiscalNote",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
     "Method": "AddFiscalNote",
-    "RelativePath": "api/FiscalNote",
+    "RelativePath": "api/FiscalNote/fiscalnote",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -23,6 +13,53 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
+    "Method": "UpdateFiscalNote",
+    "RelativePath": "api/FiscalNote/fiscalnote/{fiscalNoteId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fiscalNoteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QueroNotaFiscal.Models.Requests.FiscalNoteRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
+    "Method": "DeleteFiscalNote",
+    "RelativePath": "api/FiscalNote/fiscalnote/{fiscalNoteId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fiscalNoteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "QueroNotaFiscal.Controllers.FiscalNoteController",
+    "Method": "GetFiscalNotes",
+    "RelativePath": "api/FiscalNote/fiscalnotes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -8,7 +8,7 @@ namespace QueroNotaFiscal.Services.FiscalNote
     public interface IFiscalNotesService
     {
         Task<Result<bool>> AddAsync(FiscalNoteRequest request);
-        Task<Result<bool>> UpdateAsync(FiscalNoteRequest request);
+        Task<Result<bool>> UpdateAsync(int fiscalNoteId, FiscalNoteRequest request);
         Task<Result<bool>> DeleteAsync(int fiscalNoteId);
         Task<Result<FiscalNoteDto?>> GetByIdAsync(int fiscalNoteId);
         Task<Result<IEnumerable<FiscalNoteDto>>> GetAllAsync();
