@@ -5,7 +5,7 @@
 [![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)]()
 [![Made with 💙](https://img.shields.io/badge/feito%20com-C%23-blue)]()
 
-**QueroNotaFiscal** é uma REST API CRUD desenvolvida com ASP.NET Core (.NET 8) como projeto de aprendizado. O objetivo é criar uma aplicação que gerencie Notas Fiscais, explorando conceitos de Clean Architecture, boas práticas, mapeamento de DTOs, migrations, e organização de camadas.
+**QueroNotaFiscal** é uma REST API  desenvolvida com ASP.NET Core (.NET 8) como projeto de aprendizado. O objetivo é criar uma aplicação que gerencie Notas Fiscais, explorando conceitos de Clean Architecture, boas práticas, mapeamento de DTOs, migrations, e organização de camadas.
 
 
 ---
